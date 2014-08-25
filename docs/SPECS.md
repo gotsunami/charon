@@ -59,6 +59,7 @@ JSON Example (51 lines):
 
 Now as a YAML example (37 lines):
 
+    # Define some models here
     models:
       establishment:
         address:
@@ -75,6 +76,8 @@ Now as a YAML example (37 lines):
         firms:
           type: firm
           qty: 1,2
+
+    # Enabling explicitely a model in the admin interface
     admin:
       - model: firm
         list:
