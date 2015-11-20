@@ -4,11 +4,13 @@ The awesome, user-friendly admin interface.
 
 ### YAML specific language
 
+All keywords start with an exclamation mark "`!`".
+
 #### global structure
 
 ```
 ---
-models:
+!models:
   galaxie:
     nom:
       type: text
@@ -49,27 +51,26 @@ models:
 ```
 
 #### structural keywords
-- models
+- !models
   
-- admin
-  - model
-  - list
-    - display
-    - filter
-    - search
-    - editable
-    - actions
-  - form
-    - fieldsets
-      - title
-      - fields
-    - inlines
-    - actions
+- !admin
+  - !model
+  - !list
+    - !display
+    - !filter
+    - !search
+    - !editable
+    - !actions
+  - !form
+    - !fieldsets
+      - !title
+      - !fields
+    - !inlines
+    - !actions
 
+### Leaves for Models
 
-### leaves for models
-
-- type: possible values `text`, `floating number|float`, `integer|int`, `file`
-- constraint: possible values `positive`, `negative`, `not null`, `not empty`
-- qty: possible values `<number>`, `<number> to <number>`, `<number> or <number> or ...`
-- choices: YAML list
+- `!type`: possible values `text`, `floating number|float`, `integer|int`, `file`
+- `!constraint`: possible values `positive`, `negative`, `not null`, `not empty`
+- `!qty`: possible values `<number>`, `<number> to <number>`, `<number> or <number> or ...`
+- `!choices`: YAML list
