@@ -46,6 +46,7 @@ models:
       type: integer
       constraint: positive
       qty: '0,1'
+```
 
 #### structural keywords
 - models
@@ -64,7 +65,7 @@ models:
       - fields
     - inlines
     - actions
-```
+
 
 ### leaves for models
 
