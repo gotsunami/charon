@@ -6,6 +6,7 @@ The awesome, user-friendly admin interface.
 
 #### global structure
 
+```
 ---
 models:
   galaxie:
@@ -63,6 +64,7 @@ models:
       - fields
     - inlines
     - actions
+```
 
 ### leaves for models
 
