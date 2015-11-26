@@ -4,59 +4,9 @@ The awesome, user-friendly admin interface.
 
 ### YAML specific language
 
-#### global structure
+#### Examples
 
-```
----
-models:
-  galaxie:
-    nom:
-      type: text
-    position:
-      type: point
-    luminosité:
-      type: number
-      quantity: 2 or 4
-      constraints:
-        - float
-        - in:
-            - 0 to 1
-            - 5 to 6
-      erreur:
-        type: number
-        constraints:
-            - float
-            - in: 0 to 1
-        quantity: 0 to 1
-    images:
-      type: image
-      quantity: 0 to 5
-  image:
-    fichier:
-      type: file
-    bande:
-      type: text
-      constraints:
-        - in:
-            - u
-            - g
-            - r
-            - i
-            - z
-  amas:
-    nom:
-      type: text
-    nombre_de_galaxies:
-      type: number
-      constraints:
-        - positive
-        - integer
-      quantity: 0 or 1
-    galaxies:
-        type: galaxie
-        quantity: 0 to n
-        parent: 1
-```
+- [galaxy.yaml](examples/galaxy.yaml)
 
 #### structural keywords
 
