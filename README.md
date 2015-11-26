@@ -2,6 +2,10 @@
 
 The awesome, user-friendly admin interface.
 
+### Specifications
+
+Read the [specs](SPECS.md).
+
 ### YAML specific language
 
 #### Examples
