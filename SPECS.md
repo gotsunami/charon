@@ -6,27 +6,72 @@
 
 ## Overview
 
-TBW
+AMIGO LIA (Langage Intermédiaire d’Abstraction) is a simple data model abstraction language. Primarily this specification defines several keywords and the structures to define models, constraints and relationships. It uses YAML as data format.
+It is designed to be simple!
 
 ## Conventions
 
+Since LIA utilizes YAML, it has the same basic syntax system (see).
+
+## Keywords
+
+### First level
+Any LIA file contains only two first level keywords:
+    models: contains the list of models
+    admin (optional): defines the administration system to create for the models
+
+### In `models`
+
+Models are created directly under `models` using user-defined names.
+Under each model, the fields are defined using also user-defined names.
+And, under each field, some keywords can be used to define it further.
+
+Example:
+```
+models:
+    myfirstmodel:
+          myfirstfield:
+               <list of keywords>
+          mysecondfield:
+``` 
+
+A given number of keywords are used to define models and fields:
+- `type`: The type of the field. Possible values are `text`, `number`, `point`, and `file`. It can also be the name of another user-defined model in the file.
+- `constraints`: a YAML list declaring constraints on the field. Possible values are `positive`, `negative`, `not null`, `not empty`, `in`, `float|floating`, `int|integer`
+- `quantity`: the number of times the field can exist in the model. Possible values `<number>`, `<number> to <number>`, or a YAML list of the two previous definitions.
+- the syntax to define range of numbers for `in` is the same than `quantity` but can also be a YAML list of user-defined values (text for instance).
+
+### In `admin`
+
 TBW
 
-## Syntax
+### Default Values
 
 TBW
 
-## Built-in tags
+### Disambiguation
 
-TBW
-
-## Custom tags
-
-TBW
+If, for some reason, one wants to use a reserved keyword as a field or a model name, one just needs to prefix it with an exclamation mark. Example: `!type`
 
 ## Examples
 
-TBW
+```
+models:
+    topping:
+        price:
+            type: number
+            constraints:
+                - positive
+        name:
+            type: text
+    pizza:
+        toppings:
+            type: topping
+            quantity: 3 to n
+```
+
+See directory examples for more complexity.
+
 
 ## References
 
