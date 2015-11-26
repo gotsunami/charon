@@ -1,0 +1,45 @@
+models:
+    earthquake:
+        intensity:
+            type: number
+            constraints:
+                - float
+                - in: 0 to 9 step 0.5
+        location:
+            type: point
+            date:
+                type: date
+            measures:
+                type: measure
+                quantity: 1 to n
+
+measure:
+    instrument:
+        type: text
+    location:
+        type: center
+    value:
+        type: number
+        constraints:
+            - float
+            - in: 0 to 9 step 0.5
+    date:
+        type: date
+    seismogram:
+        type: timeserie
+        constraints:
+            - float
+        quantity: 1 to n
+
+timeserie:
+    timestamp:
+        type: date
+    value:
+        type: number
+
+center:
+    gps:
+        type: point
+    name:
+        type: text
+        quantity: 1
