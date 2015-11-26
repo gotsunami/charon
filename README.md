@@ -7,6 +7,7 @@ The awesome, user-friendly admin interface.
 #### Examples
 
 - [galaxy.yaml](examples/galaxy.yaml)
+- [earthquake.yaml](examples/earthquake.yaml)
 
 #### structural keywords
 
