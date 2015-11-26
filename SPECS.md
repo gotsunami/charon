@@ -4,23 +4,24 @@
 
 **Author**: GoTsunami
 
-## Overview
+## 1. Overview
 
 AMIGO LIA (Langage Intermédiaire d’Abstraction) is a simple data model abstraction language. Primarily this specification defines several keywords and the structures to define models, constraints and relationships. It uses YAML as data format.
 It is designed to be simple!
 
-## Conventions
+## 2. Conventions
 
 Since LIA utilizes YAML, it has the same basic syntax system (see).
 
-## Keywords
+## 3. Keywords
 
-### First level
+### 3.1. First level
+
 Any LIA file contains only two first level keywords:
     models: contains the list of models
     admin (optional): defines the administration system to create for the models
 
-### In `models`
+### 3.2. In `models`
 
 Models are created directly under `models` using user-defined names.
 Under each model, the fields are defined using also user-defined names.
@@ -41,11 +42,11 @@ A given number of keywords are used to define models and fields:
 - `quantity`: the number of times the field can exist in the model. Possible values `<number>`, `<number> to <number>`, or a YAML list of the two previous definitions.
 - the syntax to define range of numbers for `in` is the same than `quantity` but can also be a YAML list of user-defined values (text for instance).
 
-### In `admin`
+### 3.3. In `admin`
 
 TBW
 
-### Default Values
+### 3.4. Default Values
 
 `type` = no default, required keyword
 `quantity` = 1
@@ -56,17 +57,17 @@ TBW
     for type `point` = `cartesian`
     for type `file` = no default
 
-### Disambiguation
+### 3.5. Disambiguation
 
 If, for some reason, one wants to use a reserved keyword as a field or a model name, one just needs to prefix it with an exclamation mark. Example: `!type`
 
-## Advanced types
+### 3.6. Advanced types
 
 Some advanced types are defined in LIA for an easy use of complex data.
 
 `timeserie`
 
-## Examples
+## 4. Examples
 
 ```
 models:
@@ -86,7 +87,7 @@ models:
 See directory examples for more complexity.
 
 
-## References
+## 5. References
 
 Copyright (C) 2015 by GoTsunami
 
