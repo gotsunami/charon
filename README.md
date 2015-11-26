@@ -8,7 +8,7 @@ The awesome, user-friendly admin interface.
 
 ```
 ---
-!models:
+models:
   galaxie:
     nom:
       type: text
@@ -17,10 +17,18 @@ The awesome, user-friendly admin interface.
       type: point
       quantity: 1
     luminosité:
-      type: floating number
+      type: number
       quantity: 2 or 4
+      constraints:
+        floating:
+        in:
+            - 0 to 1
       error:
-        type: floating number
+        type: number
+        constraints:
+            positive:
+            in:
+                - 0 to 1
         quantity: 0 to 1
     images:
       type: image
@@ -30,21 +38,24 @@ The awesome, user-friendly admin interface.
       type: file
       quantity: 1
     bande:
-      type: choice
+      type: text
       quantity: 1
-      choices:
-      - u
-      - g
-      - r
-      - i
-      - z
+      constraints:
+        in:
+            - u
+            - g
+            - r
+            - i
+            - z
   amas:
     nom:
       type: text
       quantity: 1
     nombre_de_galaxies:
-      type: integer
-      constraint: positive
+      type: number
+      constraints:
+        positive:
+        integer:
       quantity: 0 to 1
 ```
 
@@ -71,7 +82,7 @@ Field names may start with an exclamation mark `!` to disambiguate the meaning: 
 
 ### Leaves for Models
 
-- `type`: possible values `text`, `floating number|float`, `integer|int`, `file`
-- `constraint`: possible values `positive`, `negative`, `not null`, `not empty`
+- `type`: possible values `text`, `number`, `point`, `file`
+- `constraint`: possible values `positive`, `negative`, `not null`, `not empty`, `in`
 - `quantity`: possible values `<number>`, `<number> to <number>`, `<number> or <number> or ...`
 - `choices`: YAML list
