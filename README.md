@@ -20,13 +20,14 @@ models:
       type: number
       quantity: 2 or 4
       constraints:
-        floating:
+        float:
         in:
             - 0 to 1
-      error:
+            - 5 to 6
+      erreur:
         type: number
         constraints:
-            positive:
+            float:
             in:
                 - 0 to 1
         quantity: 0 to 1
@@ -83,6 +84,6 @@ Field names may start with an exclamation mark `!` to disambiguate the meaning: 
 ### Leaves for Models
 
 - `type`: possible values `text`, `number`, `point`, `file`
-- `constraint`: possible values `positive`, `negative`, `not null`, `not empty`, `in`
+- `constraint`: possible values `positive`, `negative`, `not null`, `not empty`, `in`, `float`, `integer`
 - `quantity`: possible values `<number>`, `<number> to <number>`, `<number> or <number> or ...`
 - `choices`: YAML list
