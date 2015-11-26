@@ -12,16 +12,16 @@ models:
   galaxie:
     nom:
       type: text
-      quantity: 1
     position:
       type: point
-      quantity: 1
     luminosité:
       type: number
       quantity: 2 or 4
       constraints:
         - float
-        - in: 0 to 1 or 5 to 6
+        - in:
+            - 0 to 1
+            - 5 to 6
       erreur:
         type: number
         constraints:
@@ -34,10 +34,8 @@ models:
   image:
     fichier:
       type: file
-      quantity: 1
     bande:
       type: text
-      quantity: 1
       constraints:
         - in:
             - u
@@ -48,13 +46,15 @@ models:
   amas:
     nom:
       type: text
-      quantity: 1
     nombre_de_galaxies:
       type: number
       constraints:
         - positive
         - integer
-      quantity: 0 to 1
+      quantity: 0 or 1
+    galaxies:
+        type: galaxie
+        quantity: 0 to n
 ```
 
 #### structural keywords
@@ -84,3 +84,11 @@ Field names may start with an exclamation mark `!` to disambiguate the meaning: 
 - `constraints`: possible values `positive`, `negative`, `not null`, `not empty`, `in`, `float|floating number`, `int|integer`
 - `quantity` and `in`: possible values `<number>`, `<number> to <number>` == `<range>`, `<number|range> or <number|range> or ...`
 - `choices`: YAML list
+
+### Rules
+
+#### Defaults values
+
+- `type` has no default value
+    - for `number`, default `constraints` is `float`
+- `quantity` default value is 1
