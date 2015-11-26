@@ -20,16 +20,13 @@ models:
       type: number
       quantity: 2 or 4
       constraints:
-        float:
-        in:
-            - 0 to 1
-            - 5 to 6
+        - float
+        - in: 0 to 1 or 5 to 6
       erreur:
         type: number
         constraints:
-            float:
-            in:
-                - 0 to 1
+            - float
+            - in: 0 to 1
         quantity: 0 to 1
     images:
       type: image
@@ -42,7 +39,7 @@ models:
       type: text
       quantity: 1
       constraints:
-        in:
+        - in:
             - u
             - g
             - r
@@ -55,8 +52,8 @@ models:
     nombre_de_galaxies:
       type: number
       constraints:
-        positive:
-        integer:
+        - positive
+        - integer
       quantity: 0 to 1
 ```
 
@@ -84,6 +81,6 @@ Field names may start with an exclamation mark `!` to disambiguate the meaning: 
 ### Leaves for Models
 
 - `type`: possible values `text`, `number`, `point`, `file`
-- `constraint`: possible values `positive`, `negative`, `not null`, `not empty`, `in`, `float`, `integer`
-- `quantity`: possible values `<number>`, `<number> to <number>`, `<number> or <number> or ...`
+- `constraints`: possible values `positive`, `negative`, `not null`, `not empty`, `in`, `float|floating number`, `int|integer`
+- `quantity` and `in`: possible values `<number>`, `<number> to <number>` == `<range>`, `<number|range> or <number|range> or ...`
 - `choices`: YAML list
