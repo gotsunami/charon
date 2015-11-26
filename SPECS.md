@@ -47,11 +47,24 @@ TBW
 
 ### Default Values
 
-TBW
+`type` = no default, required keyword
+`quantity` = 1
+`parent` = 0 to n ? 1 to n ?
+`constraints`:
+    for type `number` = `float`
+    for type `text` = no default
+    for type `point` = `cartesian`
+    for type `file` = no default
 
 ### Disambiguation
 
 If, for some reason, one wants to use a reserved keyword as a field or a model name, one just needs to prefix it with an exclamation mark. Example: `!type`
+
+## Advanced types
+
+Some advanced types are defined in LIA for an easy use of complex data.
+
+`timeserie`
 
 ## Examples
 
