@@ -55,6 +55,7 @@ models:
     galaxies:
         type: galaxie
         quantity: 0 to n
+        parent: 1
 ```
 
 #### structural keywords
