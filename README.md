@@ -50,7 +50,7 @@ The awesome, user-friendly admin interface.
 
 #### structural keywords
 
-They may start with an exclamation mark `!` to disambiguate the meaning:
+Field names may start with an exclamation mark `!` to disambiguate the meaning: they will be used a field names, not structural keywords.
 
 - models
   
