@@ -12,26 +12,26 @@ The awesome, user-friendly admin interface.
   galaxie:
     nom:
       type: text
-      qty: '1'
+      qty: 1
     position:
       type: point
-      qty: '1'
+      qty: 1
     luminosité:
       type: floating number
-      qty: '0,1'
+      qty: 2 or 4
       error:
         type: floating number
-        qty: '0,1'
+        qty: 0 to 1
     images:
       type: image
-      qty: '0,5'
+      qty: 0 to 5
   image:
     fichier:
       type: file
-      qty: '1'
+      qty: 1
     bande:
       type: choice
-      qty: '1'
+      qty: 1
       choices:
       - u
       - g
@@ -41,11 +41,11 @@ The awesome, user-friendly admin interface.
   amas:
     nom:
       type: text
-      qty: '1'
+      qty: 1
     nombre_de_galaxies:
       type: integer
       constraint: positive
-      qty: '0,1'
+      qty: 0 to 1
 ```
 
 #### structural keywords
