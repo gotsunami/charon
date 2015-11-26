@@ -1,0 +1,45 @@
+models:
+    artist:
+        constraints:
+            - unique:
+                - name and address
+                - name and telephone
+                - name
+        name:
+            type: text
+        phone:
+            type: number
+            quantity: 0 to 2
+        address:
+            street:
+                type: text
+            zipcode:
+                type: text
+            town:
+                type: text
+            country:
+                type: text
+            constraints:
+                - in:
+                    <liste des pays>
+            quantity: 0 or 1
+
+    work:
+        artist:
+            type: artist
+        title:
+            type: text
+            constraints:
+                - not empty
+        media:
+            type: text
+            constraints:
+                - in:
+                    <liste de media>
+            exhibitions:
+                type: exhibition
+                quantity: 0 to n
+
+    exhibition:
+        name:
+            type: text
