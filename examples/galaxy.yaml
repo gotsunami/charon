@@ -1,3 +1,4 @@
+# Defines galaxy and amas models and their relationship
 ---
 models:
   galaxie:
