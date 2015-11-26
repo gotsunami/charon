@@ -1,9 +1,31 @@
-Amigo 1.0 Specifiaction
+# Amigo 1.0 Specifiaction
 
-# Overview
+**Origin Date**: 2015-11-26
+
+**Author**: GoTsunami
+
+## Overview
 
 TBW
 
-# Conventions
+## Conventions
 
 TBW
+
+## Syntax
+
+TBW
+
+## Built-in tags
+
+TBW
+
+## Custom tags
+
+TBW
+
+## Examples
+
+TBW
+
+## References
