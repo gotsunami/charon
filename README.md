@@ -4,8 +4,6 @@ The awesome, user-friendly admin interface.
 
 ### YAML specific language
 
-All keywords start with an exclamation mark "`!`".
-
 #### global structure
 
 ```
@@ -51,26 +49,29 @@ All keywords start with an exclamation mark "`!`".
 ```
 
 #### structural keywords
-- !models
+
+They may start with an exclamation mark `!` to disambiguate the meaning:
+
+- models
   
-- !admin
-  - !model
-  - !list
-    - !display
-    - !filter
-    - !search
-    - !editable
-    - !actions
-  - !form
-    - !fieldsets
-      - !title
-      - !fields
-    - !inlines
-    - !actions
+- admin
+  - model
+  - list
+    - display
+    - filter
+    - search
+    - editable
+    - actions
+  - form
+    - fieldsets
+      - title
+      - fields
+    - inlines
+    - actions
 
 ### Leaves for Models
 
-- `!type`: possible values `text`, `floating number|float`, `integer|int`, `file`
-- `!constraint`: possible values `positive`, `negative`, `not null`, `not empty`
-- `!qty`: possible values `<number>`, `<number> to <number>`, `<number> or <number> or ...`
-- `!choices`: YAML list
+- `type`: possible values `text`, `floating number|float`, `integer|int`, `file`
+- `constraint`: possible values `positive`, `negative`, `not null`, `not empty`
+- `qty`: possible values `<number>`, `<number> to <number>`, `<number> or <number> or ...`
+- `choices`: YAML list
