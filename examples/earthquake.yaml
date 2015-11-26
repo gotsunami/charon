@@ -7,11 +7,11 @@ models:
                 - in: 0 to 9 step 0.5
         location:
             type: point
-            date:
-                type: date
-            measures:
-                type: measure
-                quantity: 1 to n
+        date:
+            type: date
+        measures:
+            type: measure
+            quantity: 1 to n
 
 measure:
     instrument:
