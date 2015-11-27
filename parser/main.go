@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"strconv"
+	"strings"
 
 	"gopkg.in/yaml.v2"
 )
@@ -41,8 +43,59 @@ type LIAField struct {
 	Quantity    *LIARange
 }
 
+func parseNumberConstraints(constraints *[]interface{}, arr []string) []string {
+	if constraints != nil {
+		for _, c := range *constraints {
+			if val, ok := c.(string); ok {
+				if LIAConstraint(val) == Integer {
+					arr[0] = "\tint64\t"
+				} else {
+					arr[0] = "\tfloat64\t"
+				}
+			}
+		}
+	}
+	return arr
+}
+
+func parseQuantity(quantity *LIARange, arr []string) []string {
+	// default quantity == 1
+	if quantity == nil {
+		return arr
+	}
+	// quantity: n, create an array of fixed size 'n'
+	if uval, err := strconv.ParseUint(string(*quantity), 10, 0); err == nil {
+		if uval > 1 {
+			arr = append(arr, fmt.Sprintf("[%d]", uval))
+			return arr
+		}
+	}
+	// an 'or'
+	ranges := strings.Split(string(*quantity), " or ")
+	if len(ranges) > 1 {
+		if ranges[0] == "0" && ranges[1] == "1" {
+			arr = append(arr, "*")
+		}
+		if ranges[1] != "1" {
+			return append(arr, "[]")
+		}
+	}
+	// a 'to'
+	ranges = strings.Split(string(*quantity), " to ")
+	if len(ranges) > 1 {
+		if ranges[0] == "0" {
+			arr = append(arr, "*")
+		}
+		if ranges[1] != "1" {
+			return append(arr, "[]")
+		}
+	}
+	// ?
+	return arr
+}
+
 func main() {
-	input, err := ioutil.ReadFile("examples/galaxy.yaml")
+	input, err := ioutil.ReadFile("../examples/galaxy.yaml")
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -56,37 +109,40 @@ func main() {
 	}
 
 	for key, model := range lia.Models {
-		fmt.Println("type", key, "struct {")
+		modelname := fmt.Sprintf("%s%s", strings.ToUpper(string(key[0])), key[1:])
+
+		fmt.Println("type", modelname, "struct {")
 
 		for key, field := range model {
+			fieldname := fmt.Sprintf("%s%s", strings.ToUpper(string(key[0])), key[1:])
+
+			arr := make([]string, 1)
 			switch field.T {
 			case Number:
-				if field.Constraints != nil {
-					for _, c := range *field.Constraints {
-						if val, ok := c.(string); ok {
-							if LIAConstraint(val) == Integer {
-								fmt.Println("\tint64", key)
-							} else {
-								fmt.Println("\tfloat64", key)
-							}
-						} else {
-							fmt.Println(">>>>", c)
-						}
-					}
-				}
-
+				arr = parseNumberConstraints(field.Constraints, arr)
 			case Text:
-				fmt.Println("\tstring", key)
+				arr[0] = "\tstring\t"
 			case Point:
-				fmt.Println("\tPoint", key)
+				arr[0] = "\tPoint\t"
 			case File:
-				fmt.Println("\tFile", key)
+				arr[0] = "\tFile\t"
 			default:
-				fmt.Fprintln(os.Stderr, "Unknown type", field.T)
+				if lia.Models[string(field.T)] != nil {
+					modelname := fmt.Sprintf("%s%s", strings.ToUpper(string(field.T[0])), field.T[1:])
+					arr[0] = fmt.Sprintf("\t%s\t", modelname)
+				} else {
+					fmt.Fprintln(os.Stderr, "Unknown type", field.T)
+				}
 			}
+
+			arr = parseQuantity(field.Quantity, arr)
+
+			arr = append(arr, fieldname)
+			fmt.Println(strings.Join(arr, ""))
+
 		}
 
-		fmt.Println("}")
+		fmt.Println("}\n")
 	}
 
 }
