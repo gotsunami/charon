@@ -35,7 +35,9 @@ const (
 	NotEmpty LIAConstraint = "not empty"
 )
 
-type LIARange string
+type LIASimpleRange string
+
+type LIARange []LIASimpleRange
 
 type LIAField struct {
 	T           LIAType `yaml:"type"`
@@ -52,6 +54,9 @@ func parseNumberConstraints(constraints *[]interface{}, arr []string) []string {
 				} else {
 					arr[0] = "\tfloat64\t"
 				}
+			} else {
+				fmt.Println(c.(map[interface{}]interface{}))
+				fmt.Println(">>>>>", c)
 			}
 		}
 	}
@@ -71,7 +76,7 @@ func parseQuantity(quantity *LIARange, arr []string) []string {
 		}
 	}
 	// an 'or'
-	ranges := strings.Split(string(*quantity), " or ")
+	ranges := strings.Split(string(*quantity[0]), " or ")
 	if len(ranges) > 1 {
 		if ranges[0] == "0" && ranges[1] == "1" {
 			arr = append(arr, "*")
@@ -81,7 +86,7 @@ func parseQuantity(quantity *LIARange, arr []string) []string {
 		}
 	}
 	// a 'to'
-	ranges = strings.Split(string(*quantity), " to ")
+	ranges = strings.Split(string(*quantity[0]), " to ")
 	if len(ranges) > 1 {
 		if ranges[0] == "0" {
 			arr = append(arr, "*")
