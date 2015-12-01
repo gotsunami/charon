@@ -95,8 +95,8 @@ Options:
 
 	tmpl := template.Must(template.New("playground").
 		ParseFiles(
-		path.Join(conf.TemplatePath, "templates/error.html"),
-		path.Join(conf.TemplatePath, "templates/home.html")))
+		path.Join(conf.TemplatePath, "error.html"),
+		path.Join(conf.TemplatePath, "home.html")))
 
 	server = &webserver{router, tmpl, context{"static": conf.StaticURI}}
 
