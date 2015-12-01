@@ -48,14 +48,14 @@ TBW
 
 ### 3.4. Default Values
 
-`type` = no default, required keyword
-`quantity` = 1
-`parent` = 0 to n ? 1 to n ?
-`constraints`:
-    for type `number` = `float`
-    for type `text` = no default
-    for type `point` = `cartesian`
-    for type `file` = no default
+- `type` = no default, required keyword
+- `quantity` = 1
+- `parent` = 0 to n ? 1 to n ?
+- `constraints`:
+    - for type `number` = `float`
+    - for type `text` = no default
+    - for type `point` = `cartesian`
+    - for type `file` = no default
 
 ### 3.5. Disambiguation
 
