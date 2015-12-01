@@ -43,8 +43,6 @@ func main() {
     "dbURI": "mongodb://uri",
     "staticURI": "/static",
     "templatePath": "/path/to/templates/",
-    "uploadDir": "/path/to/save/media/",
-    "APIkey": "secretkey",
 }
 
 Options:
