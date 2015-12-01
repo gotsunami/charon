@@ -1,70 +1,32 @@
-/* header */
-#header, #footer  {
-    position:fixed;
-    width:100%;
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700,300italic);
+body {
+	font-family:"Roboto",Helvetica,Arial,"sans-serif" !important;
+	background:url(img/halftone.png) repeat;
+	font-size:13px;
+	padding-top: 50px;
 }
 
-#header img{
-    height:2.6em;
-    float:left;
-    padding:0 .1em;
+html, body, .fixed {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	background-color: #EEEEEE;
 }
 
-#header span {
-    float:right;
-    font-size:.7em;
-    padding:.2em;
+.container {
+    margin-top: 40px;
 }
 
-#footer {
-    bottom:0;
+.editor-container {
+    position:relative;
+    min-height:600px;
+    border: 1px solid #CCCCCC;
 }
-
-.ui-content {
-    margin-top:3.5em;
-}
-
-/* login */
-input[type=number] {
-    width: 100px;
-}
-.ui-slider-track {
-    margin-left: 140px;
-}
-.error {
-    color: red;
-    font-weight: bold;
-}
-
-.form-signin {
-    max-width:250px;
-    margin:auto;
-}
-
-/* reports */
-input[type=number] {
-    width: 100px;
-}
-.ui-slider-track {
-    margin-left: 140px;
-}
-thead tr {
-    background-color:#EEEEEE;
-    font-style:italic;
-    color:#444444;
-}
-tbody tr.tr-main {
-    background-color:#FFFFFF;
-}
-tbody tr.tr-sub:nth-child(2n) {
-    background-color:#EEEEEE;
-}
-tbody tr.tr-sub:nth-child(2n+1) {
-    background-color:#DDDDDD;
-}
-button.btn-small {
-    margin:0;padding:5px;width:auto;
-}
-.icon-info {
-    padding:0 6px;color:#FFF;background-color:#38C;border:2px solid transparent;border-radius:50%;font-weight:normal;font-family:Times;font-size:.8em;vertical-align:top;
+    
+#editor { 
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
