@@ -90,7 +90,7 @@ Options:
 	// Routes
 	//router.HandleFunc("/report/{id}", reportHandler).Methods("GET").Name("report")
 	router.HandleFunc("/", playgroundHandler).Name("home")
-	router.PathPrefix(conf.StaticURI).Handler(http.StripPrefix(conf.StaticURI, http.FileServer(http.Dir("static/"))))
+	router.PathPrefix(conf.StaticURI).Handler(http.StripPrefix(conf.StaticURI, http.FileServer(http.Dir("assets/"))))
 	http.Handle("/", router)
 
 	tmpl := template.Must(template.New("playground").
