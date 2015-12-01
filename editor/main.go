@@ -78,14 +78,6 @@ Options:
 	log.Println("connected to database.")
 
 	router := mux.NewRouter().StrictSlash(true)
-	// Serve admin pages
-	router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		url, err := server.router.Get("reports").URL()
-		if err != nil {
-			panic(err)
-		}
-		http.Redirect(w, r, url.Path, http.StatusFound)
-	}).Name("home")
 
 	// Routes
 	//router.HandleFunc("/report/{id}", reportHandler).Methods("GET").Name("report")
