@@ -80,8 +80,8 @@ Options:
 	router := mux.NewRouter().StrictSlash(true)
 
 	// Routes
-	//router.HandleFunc("/report/{id}", reportHandler).Methods("GET").Name("report")
-	router.HandleFunc("/", playgroundHandler).Name("home")
+	router.HandleFunc("/{id:[0-9a-zA-Z]+}", playgroundHandler).Name("playground")
+	router.HandleFunc("/", homeHandler).Name("home")
 	router.PathPrefix(conf.StaticURI).Handler(http.StripPrefix(conf.StaticURI, http.FileServer(http.Dir("assets/"))))
 	http.Handle("/", router)
 

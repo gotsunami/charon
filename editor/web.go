@@ -1,11 +1,23 @@
 package main
 
 import (
+	"crypto/sha1"
 	"fmt"
 	"log"
 	"net/http"
 	"net/http/httptest"
+	"time"
 )
+
+func randomPlaygroundPath() string {
+	b := sha1.Sum([]byte(fmt.Sprintf("%d", time.Now().Unix())))
+	return fmt.Sprintf("%x", b)
+}
+
+func homeHandler(w http.ResponseWriter, r *http.Request) {
+	// Moved temporarily
+	http.Redirect(w, r, randomPlaygroundPath(), 302)
+}
 
 func playgroundHandler(w http.ResponseWriter, r *http.Request) {
 	defer func() {

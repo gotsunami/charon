@@ -108,10 +108,12 @@ models:
 
       <div class="container">
 	<button class="btn btn-default">Enregistrer</button>
+	<a id="action-new" class="btn" href="/">Nouveau</a>
       </div>
 
+    <script src="{{.Context.static}}/js/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.2/ace.js" type="text/javascript" charset="utf-8"></script>
-    <script>
+    <script type="text/javascript">
       var editor = ace.edit("editor");
       editor.setTheme("ace/theme/tomorrow");
       editor.getSession().setMode("ace/mode/yaml");
