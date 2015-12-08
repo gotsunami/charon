@@ -8,6 +8,8 @@ import (
 	"net/http/httptest"
 	"strings"
 	"time"
+
+	"github.com/gorilla/mux"
 )
 
 const dfltYAML = `
@@ -82,14 +84,17 @@ func playgroundHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}()
 
+	vars := mux.Vars(r)
+	sketchName := vars["id"]
+
 	content := dfltYAML
-	s, err := findSketchByName(r.URL.Path[1:])
+	s, err := findSketchByName(sketchName)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 	if s != nil {
-		content = s.content
+		content = s.Content
 	}
 
 	// Records the content and render it only if no error occured
@@ -97,10 +102,41 @@ func playgroundHandler(w http.ResponseWriter, r *http.Request) {
 	type data struct {
 		Context       context
 		EditorContent string
+		SketchName    string
 	}
-	args := &data{server.GetContext(), content}
+	args := &data{server.GetContext(), content, sketchName}
 	if err := server.templates.ExecuteTemplate(wtmp, "home", args); err != nil {
 		panic(err)
 	}
 	fmt.Fprintf(w, wtmp.Body.String())
+}
+
+func saveSketchHandler(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	sketchName := vars["id"]
+
+	s, err := findSketchByName(sketchName)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	content := r.PostFormValue("content")
+	if s == nil {
+		s = new(sketch)
+		s.Name = sketchName
+		s.Content = content
+		if err := s.create(); err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+	} else {
+		// Update
+		s.Content = content
+		if err := s.update(); err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
+	}
+	log.Printf("Saved sketch %s", sketchName)
 }

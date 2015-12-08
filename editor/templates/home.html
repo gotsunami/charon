@@ -59,7 +59,7 @@ models:
     </div> <!-- /container -->
 
       <div class="container">
-	<button class="btn btn-default">Enregistrer</button>
+	<button id="action-save" class="btn btn-default">Enregistrer</button>
 	<a id="action-new" class="btn" href="/">Nouveau</a>
       </div>
 
@@ -69,6 +69,11 @@ models:
       var editor = ace.edit("editor");
       editor.setTheme("ace/theme/tomorrow");
       editor.getSession().setMode("ace/mode/yaml");
+      $("#action-save").click(function() {
+          $.post("/save/{{.SketchName}}", {content: editor.getValue()}, $(function(data) {
+            console.log("OK");
+        }));
+      });
     </script>
   </body>
 </html>

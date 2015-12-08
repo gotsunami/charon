@@ -2,6 +2,7 @@ package main
 
 import (
 	"strings"
+	"time"
 
 	"labix.org/v2/mgo"
 	"labix.org/v2/mgo/bson"
@@ -20,8 +21,32 @@ type database struct {
 var db *database
 
 type sketch struct {
-	name    string
-	content string
+	Name         string `bson:"_id" json:"id"`
+	Content      string
+	CreationDate *time.Time
+}
+
+func (s *sketch) create() error {
+	t := time.Now().UTC()
+	s.CreationDate = &t
+
+	err := db.playgroundCol.Insert(s)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (s *sketch) update() error {
+	err := db.playgroundCol.Update(bson.M{"_id": s.Name}, s)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (s *sketch) delete() error {
+	return db.playgroundCol.Remove(bson.M{"_id": s.Name})
 }
 
 func findSketch(attr string, val interface{}) (*sketch, error) {
@@ -41,5 +66,5 @@ func findSketch(attr string, val interface{}) (*sketch, error) {
 }
 
 func findSketchByName(name string) (*sketch, error) {
-	return findSketch("name", name)
+	return findSketch("id", name)
 }
