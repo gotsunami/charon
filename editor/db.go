@@ -24,6 +24,7 @@ type sketch struct {
 	Name         string `bson:"_id" json:"id"`
 	Content      string
 	CreationDate *time.Time
+	LastUpdated  *time.Time
 }
 
 func (s *sketch) create() error {
@@ -38,6 +39,8 @@ func (s *sketch) create() error {
 }
 
 func (s *sketch) update() error {
+	t := time.Now().UTC()
+	s.LastUpdated = &t
 	err := db.playgroundCol.Update(bson.M{"_id": s.Name}, s)
 	if err != nil {
 		return err
