@@ -80,7 +80,7 @@ Options:
 	router := mux.NewRouter().StrictSlash(true)
 
 	// Routes
-	router.HandleFunc("/save/{id:[0-9A-Z]+}", saveSketchHandler).Methods("POST").Name("saveSketch")
+	router.HandleFunc("/save/{id:[0-9A-Z]{6}}", saveSketchHandler).Methods("POST").Name("saveSketch")
 	router.HandleFunc("/{id:[0-9A-Z]{6}}", playgroundHandler).Name("playground")
 	router.HandleFunc("/", homeHandler).Name("home")
 	router.PathPrefix(conf.StaticURI).Handler(http.StripPrefix(conf.StaticURI, http.FileServer(http.Dir("assets/"))))
