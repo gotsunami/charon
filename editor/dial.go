@@ -7,18 +7,6 @@ import (
 	"labix.org/v2/mgo"
 )
 
-const (
-	playgroundColName = "playground"
-)
-
-type database struct {
-	name          string
-	playgroundCol *mgo.Collection
-	session       *mgo.Session
-}
-
-var db *database
-
 func playgroundIndexes() []mgo.Index {
 	idxs := []mgo.Index{
 		{
