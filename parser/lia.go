@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"strconv"
+	"strings"
 
 	"gopkg.in/yaml.v2"
 )
@@ -59,24 +60,27 @@ func parseQuantity(field *LIAField, f *Field) error {
 
 	// default quantity == 1
 	if quantity == nil {
-		f.Quantity = []Range{Range{Min: "1", Max: "1"}}
+		f.Quantity = []Range{Range{Min: 1, Max: 1}}
 		return nil
 	}
 	// quantity: n, create an array of fixed size 'n'
-	if _, err := strconv.ParseUint(string(*quantity), 10, 0); err == nil {
-		f.Quantity = []Range{Range{Min: string(*quantity), Max: string(*quantity)}}
+	if uval, err := strconv.ParseUint(string(*quantity), 10, 0); err == nil {
+		f.Quantity = []Range{Range{Min: float64(uval), Max: float64(uval)}}
 		return nil
 	}
 	// 	// an 'or'
-	// 	ranges := strings.Split(string(*quantity), " or ")
-	// 	if len(ranges) > 1 {
-	// 		if ranges[0] == "0" && ranges[1] == "1" {
-	// 			arr = append(arr, "*")
-	// 		}
-	// 		if ranges[1] != "1" {
-	// 			return append(arr, "[]")
-	// 		}
-	// 	}
+	ranges := strings.Split(string(*quantity), " or ")
+	if len(ranges) > 1 {
+		minval, err := strconv.ParseUint(ranges[0], 10, 0)
+		if err != nil {
+			return err
+		}
+		maxval, err := strconv.ParseUint(ranges[1], 10, 0)
+		if err != nil {
+			return err
+		}
+		f.Quantity = []Range{Range{Min: float64(minval), Max: float64(maxval)}}
+	}
 	// 	// a 'to'
 	// 	ranges = strings.Split(string(*quantity), " to ")
 	// 	if len(ranges) > 1 {
@@ -158,15 +162,15 @@ func parse() (*DatabaseScheme, error) {
 				parseFileConstraints(&field, f)
 			default:
 				if lia.Models[string(field.T)] != nil {
-					modelname := capitalize(string(field.T))
-					f.Type = modelname
+					f.Type = capitalize(string(field.T))
 				} else {
 					return nil, errors.New(fmt.Sprintf("Unknown type %v", field.T))
 				}
 			}
 
-			m.Fields = append(m.Fields, *f)
 			parseQuantity(&field, f)
+
+			m.Fields = append(m.Fields, *f)
 		}
 		db.Models = append(db.Models, m)
 	}

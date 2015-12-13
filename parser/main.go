@@ -28,19 +28,19 @@ type Field struct {
 }
 
 type Range struct {
-	Min string
-	Max string
+	Min float64
+	Max float64
 }
 
 type Constraint interface {
 	Parse(constraint interface{}) error
-	ToString() (string, error)
+	ToGoSourceCode() (string, error)
 }
 
-func (db *DatabaseScheme) ToString() (string, error) {
+func (db *DatabaseScheme) ToGoSourceCode() (string, error) {
 	db.Result = make([]string, 0)
 	for _, model := range db.Models {
-		str, err := model.ToString()
+		str, err := model.ToGoSourceCode()
 		if err != nil {
 			return "", err
 		}
@@ -49,22 +49,25 @@ func (db *DatabaseScheme) ToString() (string, error) {
 	return strings.Join(db.Result, "\n"), nil
 }
 
-func (m *Model) ToString() (string, error) {
+func (m *Model) ToGoSourceCode() (string, error) {
 	m.Result = []string{fmt.Sprintf("type %s struct {", m.Name)}
+
 	for _, field := range m.Fields {
-		str, err := field.ToString()
+		str, err := field.ToGoSourceCode()
 		if err != nil {
 			return "", err
 		}
 		m.Result = append(m.Result, str)
 	}
+
+	m.Result = append(m.Result, "}")
 	return strings.Join(m.Result, "\n"), nil
 }
 
-func (f *Field) ToString() (string, error) {
-	f.Result = []string{fmt.Sprintf("%s %s %s", f.Name, f.Quantity, f.Type)}
+func (f *Field) ToGoSourceCode() (string, error) {
+	f.Result = []string{fmt.Sprintf("%s %s%s", f.Name, formatRange(f.Quantity), f.Type)}
 	for _, c := range f.Constraints {
-		str, err := c.ToString()
+		str, err := c.ToGoSourceCode()
 		if err != nil {
 			return "", err
 		}
@@ -79,6 +82,11 @@ func main() {
 	if err != nil {
 		fmt.Println(err)
 	} else {
-		fmt.Println(db.ToString())
+		str, err := db.ToGoSourceCode()
+		if err != nil {
+			fmt.Println(err)
+		} else {
+			fmt.Printf(str)
+		}
 	}
 }
