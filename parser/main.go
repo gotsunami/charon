@@ -86,6 +86,8 @@ func main() {
 		if err != nil {
 			fmt.Println(err)
 		} else {
+			fmt.Println("package toto")
+			fmt.Println("import \"charon.models\"")
 			fmt.Printf(str)
 		}
 	}

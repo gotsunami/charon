@@ -121,12 +121,12 @@ func parseTextConstraints(field *LIAField, f *Field) error {
 }
 
 func parsePointConstraints(field *LIAField, f *Field) error {
-	f.Type = "Point"
+	f.Type = "models.Point"
 	return nil
 }
 
 func parseFileConstraints(field *LIAField, f *Field) error {
-	f.Type = "File"
+	f.Type = "models.File"
 	return nil
 }
 
