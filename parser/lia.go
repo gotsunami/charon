@@ -68,7 +68,7 @@ func parseQuantity(field *LIAField, f *Field) error {
 		f.Quantity = []Range{Range{Min: float64(uval), Max: float64(uval)}}
 		return nil
 	}
-	// 	// an 'or'
+	// an 'or'
 	ranges := strings.Split(string(*quantity), " or ")
 	if len(ranges) > 1 {
 		minval, err := strconv.ParseUint(ranges[0], 10, 0)
@@ -76,22 +76,25 @@ func parseQuantity(field *LIAField, f *Field) error {
 			return err
 		}
 		maxval, err := strconv.ParseUint(ranges[1], 10, 0)
+		f.Quantity = []Range{Range{Min: float64(minval), Max: float64(maxval)}}
+	}
+	// a 'to'
+	ranges = strings.Split(string(*quantity), " to ")
+	if len(ranges) > 1 {
+		minval, err := strconv.ParseUint(ranges[0], 10, 0)
 		if err != nil {
 			return err
 		}
+		maxval, err := strconv.ParseUint(ranges[1], 10, 0)
+		if err != nil {
+			if ranges[1] == "n" {
+				maxval = 10
+			} else {
+				return err
+			}
+		}
 		f.Quantity = []Range{Range{Min: float64(minval), Max: float64(maxval)}}
 	}
-	// 	// a 'to'
-	// 	ranges = strings.Split(string(*quantity), " to ")
-	// 	if len(ranges) > 1 {
-	// 		if ranges[0] == "0" {
-	// 			arr = append(arr, "*")
-	// 		}
-	// 		if ranges[1] != "1" {
-	// 			return append(arr, "[]")
-	// 		}
-	// 	}
-	// 	// ?
 	return nil
 }
 
@@ -168,7 +171,9 @@ func parse() (*DatabaseScheme, error) {
 				}
 			}
 
-			parseQuantity(&field, f)
+			if err = parseQuantity(&field, f); err != nil {
+				return nil, err
+			}
 
 			m.Fields = append(m.Fields, *f)
 		}
