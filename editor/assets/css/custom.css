@@ -1,0 +1,32 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700,300italic);
+body {
+	font-family:"Roboto",Helvetica,Arial,"sans-serif" !important;
+	background:url(img/halftone.png) repeat;
+	font-size:13px;
+	padding-top: 50px;
+}
+
+html, body, .fixed {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	background-color: #EEEEEE;
+}
+
+.container {
+    margin-top: 40px;
+}
+
+.editor-container {
+    position:relative;
+    min-height:600px;
+    border: 1px solid #CCCCCC;
+}
+    
+#editor { 
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}

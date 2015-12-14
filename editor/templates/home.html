@@ -1,0 +1,80 @@
+{{define "home"}}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+    <title>LIA playground</title>
+    <link href="{{.Context.static}}/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Icons -->
+    <link href="{{.Context.static}}/fontello/css/fontello.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="{{.Context.static}}/css/custom.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-header">
+	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+	  <span class="sr-only">Toggle navigation</span>
+	  <span class="icon-bar"></span>
+	  <span class="icon-bar"></span>
+	  <span class="icon-bar"></span>
+	</button>
+	<img src="{{.Context.static}}/images/logo4blackbg.png" height=60 />
+      </div>
+    </nav>
+    
+    <div class="row">
+      <div class="editor-container col-md-6">
+        <div id="editor">{{.EditorContent}}</div>
+      </div>
+      <div class="col-md-6">
+	<h4>Aide</h4>
+	<ul>
+	  <li>Structure générique : <pre>
+models:
+    (model 1):
+        (champ 1):
+	    (paramètres de champ)
+        (champ 2):
+	    (paramètres de champ)
+    (model 2):
+        ...
+</pre>
+	  </li>
+	  <li>Paramètres de champ :
+	    <pre>type : "text", "number", "point" ou "file"</pre>
+	    <pre>quantity : </pre>
+	    <pre>constraint : </pre>
+	  </li>
+	  <li><a href="#" target="_blank">Spécifications complètes du langage</a></li>
+	</ul>
+      </div>
+    </div> <!-- /container -->
+
+      <div class="container">
+	<button id="action-save" class="btn btn-default">Enregistrer</button>
+	<a id="action-new" class="btn" href="/">Nouveau</a>
+      </div>
+
+    <script src="{{.Context.static}}/js/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.2/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+      var editor = ace.edit("editor");
+      editor.setTheme("ace/theme/tomorrow");
+      editor.getSession().setMode("ace/mode/yaml");
+      $("#action-save").click(function() {
+          $.post("/save/{{.SketchName}}", {content: editor.getValue()}, $(function(data) {
+            console.log("OK");
+        }));
+      });
+    </script>
+  </body>
+</html>
+{{end}}
