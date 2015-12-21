@@ -73,7 +73,7 @@ Options:
 	}
 
 	if err := dial(conf.DbURI, conf); err != nil {
-		log.Fatal("can't connect to database: ", err)
+		log.Println("can't connect to database: ", err)
 	}
 	log.Println("connected to database.")
 

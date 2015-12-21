@@ -13,8 +13,8 @@ html, body, .fixed {
 	background-color: #EEEEEE;
 }
 
-.container {
-    margin-top: 40px;
+.main-container {
+    margin: 60px 15px 0 15px;
 }
 
 .editor-container {
@@ -29,4 +29,10 @@ html, body, .fixed {
     right: 0;
     bottom: 0;
     left: 0;
+    font-size:1.2em;
+}
+
+.actions {
+    margin-top: 20px;
+    width:50%;
 }

@@ -87,7 +87,7 @@ func main() {
 			fmt.Println(err)
 		} else {
 			fmt.Println("package toto")
-			fmt.Println("import \"charon.models\"")
+			fmt.Println("import \"amigo/parser/models\"")
 			fmt.Printf(str)
 		}
 	}

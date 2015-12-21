@@ -30,7 +30,7 @@
       </div>
     </nav>
     
-    <div class="row">
+    <div class="row main-container">
       <div class="editor-container col-md-6">
         <div id="editor">{{.EditorContent}}</div>
       </div>
@@ -58,9 +58,15 @@ models:
       </div>
     </div> <!-- /container -->
 
-      <div class="container">
-	<button id="action-save" class="btn btn-default">Enregistrer</button>
-	<a id="action-new" class="btn" href="/">Nouveau</a>
+      <div class="actions">
+	<div class="col-md-6">
+	  <button id="action-save" class="btn btn-success"><i class="glyphicon glyphicon-saved" title="Enregistrer"></i></button>
+	  <a id="action-new" class="btn btn-default" href="/"><i class="glyphicon glyphicon-file" title="Nouveau"></i></a>
+	  <a id="action-new" class="btn btn-default" href="/"><i class="glyphicon glyphicon-share" title="Partager"></i></a>
+	</div>
+	<div class="col-md-6 text-right">
+	  <button id="font-plus" class="btn btn-info"><i class="glyphicon glyphicon-plus"></i></button>
+	  <button id="font-minus" class="btn btn-info"><i class="glyphicon glyphicon-minus"></i></button>
       </div>
 
     <script src="{{.Context.static}}/js/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
@@ -75,6 +81,7 @@ $(function() {
     function saveEditor() {
         $.post("/save/{{.SketchName}}", {content: editor.getValue()}, function(data) {
             clearTimeout(autosave);
+	    $("#action-save").attr("class", "btn btn-success").find("i").attr("class", "glyphicon glyphicon-saved");
         });
     }
 
@@ -83,10 +90,11 @@ $(function() {
     });
 
     $("#editor").keyup(function() {
+	$("#action-save").attr("class", "btn btn-danger").find("i").attr("class", "glyphicon glyphicon-save");
         if (autosave !== undefined) {
             clearTimeout(autosave);
         }
-        autosave = setTimeout(saveEditor, 10000);
+        autosave = setTimeout(saveEditor, 5000);
     });
 });
 
