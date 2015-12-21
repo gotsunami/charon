@@ -39,6 +39,6 @@ html, body, .fixed {
 }
 
 .actions {
-    margin-top: 20px;
-    width:50%;
+    margin: 20px -15px 0 -15px;
+    clear:both;
 }

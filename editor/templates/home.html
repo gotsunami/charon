@@ -32,9 +32,28 @@
     </nav>
     
     <div class="row main-container">
-      <div class="editor-container col-md-6">
-        <div id="editor">{{.EditorContent}}</div>
+      <div class="col-md-6">
+
+	<div class="editor-container">
+          <div id="editor">{{.EditorContent}}</div>
+	</div>
+
+	<div class="actions">
+	  <div class="col-md-6">
+	    <button id="action-save" class="btn btn-success"><i class="glyphicon glyphicon-saved"></i> Enregistrer</button>
+	    <a id="action-new" class="btn btn-default" href="/"><i class="glyphicon glyphicon-file"></i> Nouveau</a>
+	    <button id="action-share" class="btn btn-default"><i class="glyphicon glyphicon-share"></i> Partager</button>
+	  </div>
+	  <div class="col-md-6 text-right">
+	    <button id="editor-clear" class="btn btn-info" title="Effacer le contenu"><i class="glyphicon glyphicon-erase"></i></button>
+	    <button id="editor-full" class="btn btn-info" title="Editeur plein écran"><i class="glyphicon glyphicon-fullscreen"></i></button>
+	    <button id="font-plus" data-value="0.5" class="btn btn-info" title="Augmenter taille police"><i class="glyphicon glyphicon-plus"></i></button>
+	    <button id="font-minus" data-value="-0.5" class="btn btn-info" title="Diminuer taille police"><i class="glyphicon glyphicon-minus"></i></button>
+	  </div>
+	</div>
+
       </div>
+
       <div class="col-md-6">
 	<h4>Aide</h4>
 	<ul>
@@ -72,20 +91,7 @@ constraints :
 	</ul>
       </div>
     </div> <!-- /container -->
-
-      <div class="actions">
-	<div class="col-md-6">
-	  <button id="action-save" class="btn btn-success"><i class="glyphicon glyphicon-saved"></i> Enregistrer</button>
-	  <a id="action-new" class="btn btn-default" href="/"><i class="glyphicon glyphicon-file"></i> Nouveau</a>
-	  <button id="action-share" class="btn btn-default"><i class="glyphicon glyphicon-share"></i> Partager</button>
-	</div>
-	<div class="col-md-6 text-right">
-	  <button id="editor-clear" class="btn btn-info" title="Effacer le contenu"><i class="glyphicon glyphicon-erase"></i></button>
-	  <button id="editor-full" class="btn btn-info" title="Editeur plein écran"><i class="glyphicon glyphicon-fullscreen"></i></button>
-	  <button id="font-plus" data-value="0.5" class="btn btn-info" title="Augmenter taille police"><i class="glyphicon glyphicon-plus"></i></button>
-	  <button id="font-minus" data-value="-0.5" class="btn btn-info" title="Diminuer taille police"><i class="glyphicon glyphicon-minus"></i></button>
-      </div>
-
+    
     <script src="{{.Context.static}}/js/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="{{.Context.static}}/js/jquery.fullscreen.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="{{.Context.static}}js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
