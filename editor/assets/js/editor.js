@@ -7,7 +7,7 @@ $(function() {
 
     // post call to save content of the playground
     function saveEditor() {
-      $.post("/save/{{.SketchName}}", {content: editor.getValue()}, function(data) {
+      $.post("/save/"+sketchName, {content: editor.getValue()}, function(data) {
 	  clearTimeout(autosave);
 	  $("#action-save").attr("class", "btn btn-success").find("i").attr("class", "glyphicon glyphicon-saved");
 	});
