@@ -41,7 +41,7 @@ models:
       constraints:
         - positive
         - integer
-      quantity: 0 or 1
+      quantity: 1
     galaxies:
         type: galaxie
         quantity: 0 to n
