@@ -66,14 +66,30 @@ models:
     <script src="{{.Context.static}}/js/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.2/ace.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
-      var editor = ace.edit("editor");
-      editor.setTheme("ace/theme/tomorrow");
-      editor.getSession().setMode("ace/mode/yaml");
-      $("#action-save").click(function() {
-          $.post("/save/{{.SketchName}}", {content: editor.getValue()}, $(function(data) {
-            console.log("OK");
-        }));
-      });
+$(function() {
+    var editor = ace.edit("editor");
+    var autosave;
+    editor.setTheme("ace/theme/tomorrow");
+    editor.getSession().setMode("ace/mode/yaml");
+
+    function saveEditor() {
+        $.post("/save/{{.SketchName}}", {content: editor.getValue()}, function(data) {
+            clearTimeout(autosave);
+        });
+    }
+
+    $("#action-save").click(function() {
+        saveEditor();
+    });
+
+    $("#editor").keyup(function() {
+        if (autosave != "undefined") {
+            clearTimeout(autosave);
+        }
+        autosave = setTimeout(saveEditor, 10000);
+    });
+});
+
     </script>
   </body>
 </html>
