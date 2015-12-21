@@ -2,7 +2,7 @@
 
 body {
     font-family:"Marvel",Helvetica,Arial,"sans-serif" !important;
-    font-size:13px;
+    font-size:15px;
     padding-top: 50px;
 }
 
@@ -35,7 +35,7 @@ html, body, .fixed {
     right: 0;
     bottom: 0;
     left: 0;
-    font-size:1.2em;
+    font-size:15px;
 }
 
 .actions {
