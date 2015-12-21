@@ -36,4 +36,7 @@ $(function() {
     $("#font-plus, #font-minus").click(function() {
 	$("#editor").css("font-size", (parseFloat($("#editor").css("font-size"))+parseFloat($(this).attr("data-value")))+"px");
       });
+
+    // add tooltips to buttons
+    $(".actions button, .actions a").tooltip();
   });
