@@ -12,6 +12,12 @@ html, body, .fixed {
     overflow: hidden;
     background-color: #EEEEEE;
 }
+.navbar h1 {
+    font-size:22px;
+    float:right;
+    color:#CCCCCC;
+    margin-left:20px;
+}
 
 .main-container {
     margin: 60px 15px 0 15px;
