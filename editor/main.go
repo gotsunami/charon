@@ -91,7 +91,7 @@ Options:
 		path.Join(conf.TemplatePath, "error.html"),
 		path.Join(conf.TemplatePath, "home.html")))
 
-	server = &webserver{router, tmpl, context{"static": conf.StaticURI}}
+	server = &webserver{router, tmpl, context{"static": conf.StaticURI, "version": appVersion}}
 
 	log.Printf("Listening on port %v, waiting for incoming requests...", *port)
 	log.Fatal(http.ListenAndServe(":"+*port, nil))

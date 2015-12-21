@@ -1,16 +1,16 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,700,300italic);
+@import url(https://fonts.googleapis.com/css?family=Marvel);
+
 body {
-	font-family:"Roboto",Helvetica,Arial,"sans-serif" !important;
-	background:url(img/halftone.png) repeat;
-	font-size:13px;
-	padding-top: 50px;
+    font-family:"Marvel",Helvetica,Arial,"sans-serif" !important;
+    font-size:13px;
+    padding-top: 50px;
 }
 
 html, body, .fixed {
-	height: 100%;
-	width: 100%;
-	overflow: hidden;
-	background-color: #EEEEEE;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background-color: #EEEEEE;
 }
 
 .main-container {

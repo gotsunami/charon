@@ -27,6 +27,7 @@
 	  <span class="icon-bar"></span>
 	</button>
 	<img src="{{.Context.static}}/images/logo4blackbg.png" height=60 />
+	<span>LIA playground {{.Context.version}}</span>
       </div>
     </nav>
     
@@ -60,16 +61,18 @@ models:
 
       <div class="actions">
 	<div class="col-md-6">
-	  <button id="action-save" class="btn btn-success" title="Enregistrer"><i class="glyphicon glyphicon-saved"></i></button>
-	  <a id="action-new" class="btn btn-default" href="/" title="Nouveau"><i class="glyphicon glyphicon-file"></i></a>
-	  <button id="action-share" class="btn btn-default" title="Partager"><i class="glyphicon glyphicon-share"></i></button>
+	  <button id="action-save" class="btn btn-success"><i class="glyphicon glyphicon-saved"></i> Enregistrer</button>
+	  <a id="action-new" class="btn btn-default" href="/"><i class="glyphicon glyphicon-file"></i> Nouveau</a>
+	  <button id="action-share" class="btn btn-default"><i class="glyphicon glyphicon-share"></i> Partager</button>
 	</div>
 	<div class="col-md-6 text-right">
+	  <button id="editor-full" class="btn btn-info" title="Editeur plein écran"><i class="glyphicon glyphicon-fullscreen"></i></button>
 	  <button id="font-plus" data-value="0.5" class="btn btn-info" title="Augmenter taille police"><i class="glyphicon glyphicon-plus"></i></button>
 	  <button id="font-minus" data-value="-0.5" class="btn btn-info" title="Diminuer taille police"><i class="glyphicon glyphicon-minus"></i></button>
       </div>
 
     <script src="{{.Context.static}}/js/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="{{.Context.static}}/js/jquery.fullscreen.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="{{.Context.static}}js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.2/ace.js" Type="text/javascript" charset="utf-8"></script>
     <script src="{{.Context.static}}/js/editor.js" type="text/javascript" charset="utf-8"></script>

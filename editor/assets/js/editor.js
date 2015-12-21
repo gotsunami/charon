@@ -37,6 +37,12 @@ $(function() {
 	$("#editor").css("font-size", (parseFloat($("#editor").css("font-size"))+parseFloat($(this).attr("data-value")))+"px");
       });
 
+    // bind function for fullscreen mode
+    $('#editor-full').click(function() {
+	$('#editor').fullscreen();
+	return false;
+      });
+
     // add tooltips to buttons
     $(".actions button, .actions a").tooltip();
   });
