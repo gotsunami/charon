@@ -83,7 +83,7 @@ $(function() {
     });
 
     $("#editor").keyup(function() {
-        if (autosave != "undefined") {
+        if (autosave !== undefined) {
             clearTimeout(autosave);
         }
         autosave = setTimeout(saveEditor, 10000);
