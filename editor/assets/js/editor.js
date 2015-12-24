@@ -55,4 +55,16 @@ $(function() {
 
     // add tooltips to buttons
     $(".actions button, .actions a").tooltip();
+
+    $("#example iframe").load(function() {
+	    $(this).parent().fadeIn();
+	});
+    $("#example .close").click(function() {
+	    $(this).parent().fadeOut();
+	});
+    
+    $("a[data-example]").click(function() {
+	    $("#example iframe").attr("src", "example/"+$(this).attr("data-example"));
+	});
   });
+

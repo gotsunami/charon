@@ -1,0 +1,41 @@
+{{define "example"}}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+    <title>LIA playground</title>
+    <link href="{{.Context.static}}/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Icons -->
+    <link href="{{.Context.static}}/fontello/css/fontello.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="{{.Context.static}}/css/custom.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <h4>Exemple : {{.SketchName}}.yaml</h4>
+    <div class="col-md-12">
+      <div class="editor-container">
+        <div id="editor">{{.EditorContent}}</div>
+      </div>
+    </div>
+    
+    <script src="{{.Context.static}}/js/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.2/ace.js" Type="text/javascript" charset="utf-8"></script>
+    <script>
+      $(function() {
+      var editor = ace.edit("editor");
+      var editor = ace.edit("editor");
+      editor.setTheme("ace/theme/tomorrow");
+      editor.getSession().setMode("ace/mode/yaml");
+      editor.setReadOnly(true);
+      });
+    </script>
+  </body>
+</html>
+{{end}}

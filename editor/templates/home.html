@@ -46,7 +46,7 @@
 	  </div>
 	  <div class="col-md-6 text-right">
 	    <button id="editor-clear" class="btn btn-info" title="Effacer le contenu"><i class="glyphicon glyphicon-erase"></i></button>
-	    <button id="editor-full" class="btn btn-info" title="Editeur plein écran"><i class="glyphicon glyphicon-fullscreen"></i></button>
+	    <button id="editor-full" class="btn btn-info" title="Editeur plein Ã©cran"><i class="glyphicon glyphicon-fullscreen"></i></button>
 	    <button id="font-plus" data-value="0.5" class="btn btn-info" title="Augmenter taille police"><i class="glyphicon glyphicon-plus"></i></button>
 	    <button id="font-minus" data-value="-0.5" class="btn btn-info" title="Diminuer taille police"><i class="glyphicon glyphicon-minus"></i></button>
 	  </div>
@@ -55,9 +55,14 @@
       </div>
 
       <div class="col-md-6">
+	<div id="example">
+	  <div class="close pull-right">x</div>
+	  <iframe></iframe>
+	</div>
 	<h4>Aide</h4>
 	<ul>
 	  <li><a href="#" target="_blank">Spécifications complètes du langage</a></li>
+	  <li>Exemples : <a data-example="galaxy">galaxy.yaml</a>, <a data-example="artist">artist.yaml</a>, <a data-example="earthquake">earthquake.yaml</a>.</li>
 	  <li>Structure générique : <pre>
 models:
     (model 1):
@@ -69,8 +74,8 @@ models:
         ...
 </pre>
 	  </li>
-	  <li>Modèles <code>(model n)</code>. N'importe quel nom qui <b>ne soit pas un mot clé du langage</b>, par exemple <code>livre</code>. Sinon, le mot doit être précédé d'un point d'exclamation comme <code>!point</code>.</li>
-	  <li>Champs <code>(champ n)</code>. N'importe quel nom qui <b>ne soit pas un mot clé du langage</b>, par exemple <code>nb_page</code>. Sinon, le mot doit être précédé d'un point d'exclamation. Un champ peut également être le nom d'un autre modèle défini dans le fichier comme <code>page</code>.</li>
+	  <li>Modèles <code>(model n)</code>. N'importe quel nom qui <b>ne soit pas un mot clé du langage</b>, par exemple <code>livre</code>. Sinon, le mot doit Ãªtre précédé d'un point d'exclamation comme <code>!point</code>.</li>
+	  <li>Champs <code>(champ n)</code>. N'importe quel nom qui <b>ne soit pas un mot clé du langage</b>, par exemple <code>nb_page</code>. Sinon, le mot doit Ãªtre précédé d'un point d'exclamation. Un champ peut également Ãªtre le nom d'un autre modèle défini dans le fichier comme <code>page</code>.</li>
 	  <li>Paramètres de champ <code>(paramètres de champs)</code>.<br />Une liste des mots clés suivants :
 	    <pre>type : "text", "number", "point" ou "file"</pre>
 	    <pre>quantity : "{integer}" or "{integer} to {integer}" or "{integer} or {integer}".</pre>
@@ -86,7 +91,7 @@ constraints :
 	      <li>Un champ non typé est un texte de longueur indéterminée.</li>
 	      <li>Les champs sont obligatoires par défaut. Sinon il faut indiquer <code>quantity: 0 or 1</code>.</li>
 	    </ul>
-	    <code>parent</code> n'est valable que si le <code>(champ)</code> est un autre modèle. Il permet de définir la cardinalité de la relation inverse.
+	    <code>parent</code> n'est valable que si le <code>(champ)</code> est un autre <code>(model)</code>. Il permet de définir le <code>quantity</code> de la relation inverse.
 	  </li>
 	</ul>
       </div>

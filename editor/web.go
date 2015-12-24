@@ -3,65 +3,37 @@ package main
 import (
 	"crypto/sha1"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"strings"
 	"time"
 
 	"github.com/gorilla/mux"
 )
 
-const dfltYAML = `
-models:
-  galaxie:
-    nom:
-      type: text
-    position:
-      type: point
-    luminosité:
-      type: number
-      quantity: 2 or 4
-      constraints:
-        - float
-        - in:
-            - 0 to 1
-            - 5 to 6
-      erreur:
-        type: number
-        constraints:
-            - float
-            - in: 0 to 1
-        quantity: 0 to 1
-    images:
-      type: image
-      quantity: 0 to 5
-  image:
-    fichier:
-      type: file
-    bande:
-      type: text
-      constraints:
-        - in:
-            - u
-            - g
-            - r
-            - i
-            - z
-  amas:
-    nom:
-      type: text
-    nombre_de_galaxies:
-      type: number
-      constraints:
-        - positive
-        - integer
-      quantity: 0 or 1
-    galaxies:
-        type: galaxie
-        quantity: 0 to n
-        parent: 1
-`
+var dfltYAML string
+
+type data struct {
+	Context       context
+	EditorContent string
+	SketchName    string
+}
+
+func init() {
+	yamlFile, err := os.Open("../examples/galaxy.yaml")
+	if err != nil {
+		panic(err)
+	}
+
+	yaml, err := ioutil.ReadAll(yamlFile)
+	if err != nil {
+		panic(err)
+	}
+	dfltYAML = string(yaml)
+}
 
 func randomPlaygroundPath() string {
 	b := sha1.Sum([]byte(fmt.Sprintf("%d", time.Now().Unix())))
@@ -99,11 +71,6 @@ func playgroundHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Records the content and render it only if no error occured
 	wtmp := httptest.NewRecorder()
-	type data struct {
-		Context       context
-		EditorContent string
-		SketchName    string
-	}
 	args := &data{server.GetContext(), content, sketchName}
 	if err := server.templates.ExecuteTemplate(wtmp, "home", args); err != nil {
 		panic(err)
@@ -139,4 +106,23 @@ func saveSketchHandler(w http.ResponseWriter, r *http.Request) {
 
 	}
 	log.Printf("Saved sketch %s", sketchName)
+}
+
+func exampleHandler(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	yamlFile, err := os.Open("../examples/" + vars["yamlFile"] + ".yaml")
+	if err != nil {
+		panic(err)
+	}
+
+	yaml, err := ioutil.ReadAll(yamlFile)
+	if err != nil {
+		panic(err)
+	}
+
+	args := &data{server.GetContext(), string(yaml), vars["yamlFile"]}
+	err = server.templates.ExecuteTemplate(w, "example", args)
+	if err != nil {
+		panic(err)
+	}
 }

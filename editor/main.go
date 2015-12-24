@@ -82,6 +82,7 @@ Options:
 	// Routes
 	router.HandleFunc("/save/{id:[0-9A-Z]{6}}", saveSketchHandler).Methods("POST").Name("saveSketch")
 	router.HandleFunc("/{id:[0-9A-Z]{6}}", playgroundHandler).Name("playground")
+	router.HandleFunc("/example/{yamlFile:[A-Za-z]+}", exampleHandler).Name("example")
 	router.HandleFunc("/", homeHandler).Name("home")
 	router.PathPrefix(conf.StaticURI).Handler(http.StripPrefix(conf.StaticURI, http.FileServer(http.Dir("assets/"))))
 	http.Handle("/", router)
@@ -89,6 +90,7 @@ Options:
 	tmpl := template.Must(template.New("playground").
 		ParseFiles(
 		path.Join(conf.TemplatePath, "error.html"),
+		path.Join(conf.TemplatePath, "example.html"),
 		path.Join(conf.TemplatePath, "home.html")))
 
 	server = &webserver{router, tmpl, context{"static": conf.StaticURI, "version": appVersion}}
