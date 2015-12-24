@@ -11,7 +11,7 @@ It is designed to be simple!
 
 ## 2. Conventions
 
-Since LIA utilizes YAML, it has the same basic syntax system (see).
+Since LIA utilizes YAML, it has the same basic syntax system (http://yaml.org/spec/1.2/spec.html).
 
 ## 3. Keywords
 
@@ -26,6 +26,7 @@ Any LIA file contains only two first level keywords:
 Models are created directly under `models` using user-defined names.
 Under each model, the fields are defined using also user-defined names.
 And, under each field, some keywords can be used to define it further.
+In addition, a field can contain other fields.
 
 Example:
 ```
