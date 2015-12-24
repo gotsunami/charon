@@ -70,21 +70,24 @@ models:
 	    (paramètres de champ)
         (champ 2):
 	    (paramètres de champ)
+	    (champ inclus dans le champ 2):
+		(paramètres de champ)
     (model 2):
         ...
 </pre>
 	  </li>
 	  <li>Modèles <code>(model n)</code>. N'importe quel nom qui <b>ne soit pas un mot clé du langage</b>, par exemple <code>livre</code>. Sinon, le mot doit Ãªtre précédé d'un point d'exclamation comme <code>!point</code>.</li>
 	  <li>Champs <code>(champ n)</code>. N'importe quel nom qui <b>ne soit pas un mot clé du langage</b>, par exemple <code>nb_page</code>. Sinon, le mot doit Ãªtre précédé d'un point d'exclamation. Un champ peut également Ãªtre le nom d'un autre modèle défini dans le fichier comme <code>page</code>.</li>
+	  <li>Les champs peuvent inclure d'autres champs, théoriquement sans limitation de profondeur.</li>
 	  <li>Paramètres de champ <code>(paramètres de champs)</code>.<br />Une liste des mots clés suivants :
 	    <pre>type : "text", "number", "point" ou "file"</pre>
-	    <pre>quantity : "{integer}" or "{integer} to {integer}" or "{integer} or {integer}".</pre>
-	    <pre>parent : "{integer}" or "{integer} to {integer}" or "{integer} or {integer}".</pre>
+	    <pre>quantity : "{integer}" ou "{integer} to {integer}" ou "{integer} or {integer}".</pre>
+	    <pre>parent : "{integer}" ou "{integer} to {integer}" ou "{integer} or {integer}".</pre>
 	    <pre>
 constraints :
-    pour le type "text" : "null", "max", "min"
-    pour le type "number": "positive", "negative", "null", "float", "integer"
-    pour les types "text" et "number": "in" 
+    pour le type "text" : "max", "min", "not empty"
+    pour le type "number": "positive", "negative", "float|floating", "int|integer", "not null"
+    pour les types "text" et "number": "in"
 </pre>
 	    <code>type</code> vaut "text" par défaut, <code>quantity</code> vaut "1" (un) par défaut et <code>constraints</code> est vide par défaut. Ce qui signifie :
 	    <ul>
