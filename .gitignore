@@ -1,3 +1,7 @@
 *.swp
-editor/version.go
+*~
+.DS_Store
+config.json
 editor/editor
+editor/version.go
+parser/parser
