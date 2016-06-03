@@ -1,1 +1,1 @@
-A YAML editor for Amigo.
+A YAML editor for Charon

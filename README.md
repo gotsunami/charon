@@ -1,4 +1,4 @@
-## Amigo
+## Charon
 
 The awesome, user-friendly admin interface.
 
