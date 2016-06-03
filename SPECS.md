@@ -1,4 +1,4 @@
-# Amigo 1.0 Specifiaction
+# Charon 1.0 Specifiaction
 
 **Origin Date**: 2015-11-26
 
@@ -6,7 +6,7 @@
 
 ## 1. Overview
 
-AMIGO LIA (Langage Intermédiaire d’Abstraction) is a simple data model abstraction language. Primarily this specification defines several keywords and the structures to define models, constraints and relationships. It uses YAML as data format.
+Charon LIA (Langage Intermédiaire d’Abstraction) is a simple data model abstraction language. Primarily this specification defines several keywords and the structures to define models, constraints and relationships. It uses YAML as data format.
 It is designed to be simple!
 
 ## 2. Conventions
@@ -38,7 +38,7 @@ models:
 ``` 
 
 A given number of keywords are used to define models and fields:
-- `type`: The type of the field. Possible values are `text`, `number`, `point`, and `file`. It can also be the name of another user-defined model in the file.
+- `type`: The type of the field. Possible values are `text`, `number`, `point`, `date`, and `file`. It can also be the name of another user-defined model in the file.
 - `constraints`: a YAML list declaring constraints on the field. Possible values are `positive`, `negative`, `not null`, `not empty`, `in`, `float|floating`, `int|integer`
 - `quantity`: the number of times the field can exist in the model. Possible values `<number>`, `<number> to <number>`, or a YAML list of the two previous definitions.
 - the syntax to define range of numbers for `in` is the same than `quantity` but can also be a YAML list of user-defined values (text for instance).
@@ -47,7 +47,7 @@ A given number of keywords are used to define models and fields:
 
 TBW
 
-### 3.4. Default Values
+### 3.4. Default and available values
 
 - `type` = no default, required keyword
 - `quantity` = 1
@@ -56,7 +56,26 @@ TBW
     - for type `number` = `float`
     - for type `text` = no default
     - for type `point` = `cartesian`
+    - for type `date` = `GMT`
     - for type `file` = no default
+
+List of available constraints by type:
+- for type `number`:
+  - `int|integer`
+  - `float`
+  - `not null`
+  - `positive`
+  - `negative` 
+- for type `text`
+  - `not empty`
+  - `length` = `<number>` or `<number> to <number>`
+- for type `point`
+  - `cartesian`
+  - `wgs84`
+- for type `date`
+  - `GMT{+/-H}`
+- for type `file`
+  - `extension` = list of accepted extensions 
 
 ### 3.5. Disambiguation
 
@@ -92,7 +111,7 @@ See directory examples for more complexity.
 
 Copyright (C) 2015 by GoTsunami
 
-This document and translations of it may be used to implement Amigo, it may be copied and furnished to others, and derivative works that comment on or otherwise explain it or assist in its implementation may be prepared, copied, published and distributed, in whole or in part, without restriction of any kind, provided that the above copyright notice and this paragraph are included on all such copies and derivative works. However, this document itself may not bemodified in any way.
+This document and translations of it may be used to implement Charon, it may be copied and furnished to others, and derivative works that comment on or otherwise explain it or assist in its implementation may be prepared, copied, published and distributed, in whole or in part, without restriction of any kind, provided that the above copyright notice and this paragraph are included on all such copies and derivative works. However, this document itself may not bemodified in any way.
 
 The limited permissions granted above are perpetual and will not be revoked.
 
